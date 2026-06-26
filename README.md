@@ -1,2 +1,2 @@
-# learning-1
-roblox luau , basic learning of .touched with a dissapearing coin and leaderstats coin value addition
+# learning
+roblox luau , basic luau files of me learning roblox luau with some projects
