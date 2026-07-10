@@ -1,0 +1,39 @@
+local replicatedstorage = game:GetService("ReplicatedStorage")
+local rewardevent = replicatedstorage:WaitForChild("buttonclickevent")
+local buttonreward = {["bluebutton"] = 5 , ["redbutton"] = 10}
+rewardevent.OnServerEvent:Connect(function(player,button)
+	local leaderstats = player:WaitForChild("leaderstats")
+	local coins = leaderstats:WaitForChild("Coins")
+	if coins then 
+		local rewardamount = buttonreward[button]
+		coins.Value += rewardamount
+		print("reward given")
+		print(rewardamount)
+	
+		
+	
+	
+	else
+		print("error")
+	end
+end)
+This was serverscript and now localscript to connect : local buttongui = script.Parent
+local player = game.Players.LocalPlayer
+local redbutton = buttongui.redbutton
+local bluebutton = buttongui.bluebutton
+local replicatedstorage = game:GetService("ReplicatedStorage")
+local rewardevent = replicatedstorage:WaitForChild("buttonclickevent")
+
+
+
+local function onbuttonclicked(button)
+	rewardevent:FireServer(button.Name)
+	
+end
+
+redbutton.MouseButton1Click:Connect(function()
+	onbuttonclicked(redbutton)
+end)
+bluebutton.MouseButton1Click:Connect(function()
+	onbuttonclicked(bluebutton)
+end)
