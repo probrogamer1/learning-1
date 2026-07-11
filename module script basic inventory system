@@ -1,0 +1,33 @@
+local inventorymodule = {}
+local inventory = {}
+
+function inventorymodule.createinventory(player)
+	if not player then return end
+	if inventory[player] then return end
+	inventory[player] = {}
+	return inventory[player]
+	
+	
+	
+end
+function inventorymodule.additem(player,item)
+	if not inventory[player] then return end
+	if inventory[player][item] == true then return end
+	inventory[player][item] = true
+	return inventory[player]
+end
+function inventorymodule.removeitem(player,item)
+	if not inventory[player] then return end
+	inventory[player][item] = nil 
+	return inventory[player]
+end
+function inventorymodule.checkitem(player,item)
+	if not inventory[player] then return end
+	if inventory[player][item] == true then return true 
+	else
+		return false
+	
+
+	end
+end
+return inventorymodule
