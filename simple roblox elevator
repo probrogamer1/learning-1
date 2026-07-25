@@ -1,0 +1,30 @@
+local elevator = game.Workspace.elevator
+
+local debounce = false
+local ogpos = elevator.CFrame
+
+local function onTouch(hit)
+	local character = hit.Parent
+	if not character then return end
+
+	local humanoid = character:FindFirstChild("Humanoid")
+	if not humanoid then return end
+
+	local rootpart = character:FindFirstChild("HumanoidRootPart")
+	if not rootpart then return end
+
+	if debounce then return end
+	debounce = true
+
+	while debounce do
+		task.wait(0.35)
+
+		elevator.CFrame = elevator.CFrame + Vector3.new(0, -1, 0)
+		rootpart.CFrame = elevator.CFrame + Vector3.new(0, 1, 0)
+
+		
+		 end
+	end
+end
+
+elevator.Touched:Connect(onTouch)
