@@ -1,0 +1,9 @@
+local colorpart = game.Workspace.colorpart
+local function colorlight(switch)
+	while true do
+		colorpart.Color = Color3.fromRGB(math.random(0,255),math.random(0,255) ,math.random(0,255))
+		task.wait(0.5)
+	
+	end
+end
+colorpart.Touched:Connect(colorlight)
