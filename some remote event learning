@@ -1,0 +1,13 @@
+server script : local replicatedStorage = game:GetService("ReplicatedStorage")
+local event = replicatedStorage:WaitForChild("event")
+event.OnServerEvent:Connect(function(player, amount)
+	player.leaderstats.Coins.Value += amount
+end)
+local script : local player = game.Players.LocalPlayer
+local button = script.Parent
+local replicatedStorage = game:GetService("ReplicatedStorage")
+local event = replicatedStorage:WaitForChild("event")
+local function onbuttonclick(player , amount)
+	event:FireServer(10)
+end
+button.MouseButton1Click:Connect(onbuttonclick)
