@@ -1,0 +1,47 @@
+local script
+local player = game.Players.LocalPlayer
+local replicatedStorage = game:GetService("ReplicatedStorage")
+local event = replicatedStorage:WaitForChild("event")
+local playergui = player.PlayerGui
+local gui = playergui:WaitForChild("buildgui")
+local transform = game.Workspace.buildtransform
+local debounce = true
+local frame = gui:WaitForChild("Frame")
+local tickrate = 0.05
+local maxduration = 10
+local testpart = game.Workspace.testpart
+
+event.OnClientEvent:Connect(function()
+
+	local elapsedTime = 0
+	local tickrate = 1
+	if elapsedTime > maxduration then return end
+		
+	
+	while true do 
+		local random = math.random(0.1, 1)
+		testpart.Size = testpart.Size + Vector3.new(random, random , random)
+		task.wait(tickrate)
+		elapsedTime = elapsedTime + tickrate
+		
+	end
+
+	
+	
+	
+	
+end) 
+server script : local replicatedStorage = game:GetService("ReplicatedStorage")
+local event = replicatedStorage:WaitForChild("event")
+local transform = game.Workspace.buildtransform
+local testpart = game.Workspace.testpart
+
+local function  buildpart(hit)
+	local player = game.Players:GetPlayerFromCharacter(hit.Parent)
+	if player then
+		event:FireClient(player)
+		
+	end
+	
+end
+testpart.Touched:Connect(buildpart)
