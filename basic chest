@@ -1,0 +1,41 @@
+local chest = game.Workspace.chest
+local replicatedStorage = game:GetService("ReplicatedStorage")
+local event = replicatedStorage:WaitForChild("event")
+chest.Touched:Connect(function(hitpart)
+	local character = hitpart.Parent
+	local player = game.Players:GetPlayerFromCharacter(character)
+	if player then
+		event:FireClient(player)
+	end
+end) 
+that was server script above and
+local script : local chest = game.Workspace.chest
+local replicatedStorage = game:GetService("ReplicatedStorage")
+local event = replicatedStorage:WaitForChild("event")
+local player = game.Players.LocalPlayer
+local gui = player:WaitForChild("PlayerGui")
+local displaygui = gui:WaitForChild("chestgui")
+local rewardtable = {250, 50 ,100}
+local frame = displaygui:WaitForChild("Frame")
+local text = frame:WaitForChild("TextLabel")
+local debounce = false
+event.OnClientEvent:Connect(function()
+	local leaderstats = player:WaitForChild("leaderstats")
+	local coins = leaderstats:WaitForChild("Coins")
+	local index = math.random(#rewardtable)
+	local reward = rewardtable[index]
+	if coins then
+		if debounce == true then return end
+		coins.Value += reward
+		frame.Visible = true
+		text.Text = "You got " .. reward .. " coins!"
+		debounce = true
+		task.wait(2)
+		debounce = false
+		frame.Visible = false
+	end
+	
+	
+	
+	
+end)
