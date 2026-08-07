@@ -1,0 +1,32 @@
+local datastore = game:GetService("DataStoreService")
+local coinstore = datastore:GetDataStore("Coins")
+game.Players.PlayerAdded:Connect(function(player)
+	local leaderstats = player:WaitForChild("leaderstats")
+	local coins = leaderstats:WaitForChild("Coins")
+	local success,data = pcall(function()
+		return coinstore:GetAsync(player.UserId)
+	end)
+	if success then
+		coins.Value = data
+	else
+		warn("could not load data")
+	end
+			
+		
+			
+	
+		
+	
+end)
+game.Players.PlayerRemoving:Connect(function(player)
+	local leaderstats = player:WaitForChild("leaderstats")
+	local coins = leaderstats:WaitForChild("Coins")
+	local success,data = pcall(function()
+		coinstore:SetAsync(player.UserId,coins.Value)
+	end)
+	if success then
+		print("saved")
+	else
+		warn("could not save data")
+	end
+end)
