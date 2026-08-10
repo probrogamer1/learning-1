@@ -1,0 +1,8 @@
+local tweenservice = game:GetService("TweenService")
+local part = game.Workspace.movepart
+local tweeninfo = TweenInfo.new(7)
+local properties = {Position =  Vector3.new(50,0,50)}
+local tween = tweenservice:Create(part , tweeninfo , properties)
+part.Touched:Connect(function()
+	tween:Play()
+end)
