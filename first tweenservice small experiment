@@ -1,0 +1,48 @@
+local tweenservice = game:GetService("TweenService")
+local part = game.Workspace.movepart
+local animationpart = game.Workspace.actpart
+local part1 = game.Workspace.movepart2
+local info3 = TweenInfo.new(3) 
+local info1 = TweenInfo.new(1 , Enum.EasingStyle.Cubic , Enum.EasingDirection.Out   , 0,false ,1)
+local properties1 = {Position = part.Position + Vector3.new(10,0,0)}
+local tween1 = tweenservice:Create(part , info1 , properties1)
+local properties2 = {Position = part1.Position + Vector3.new(-10,0,0)}
+
+local info2 = info1
+local tween2 = tweenservice:Create(part1 , info2 , properties2)
+
+local size1 = part1.Size
+local size2 = part.Size
+
+local properties3 = {Size =  part.Size +Vector3.new(0,35,0)}
+local properties4 = {Size =  part1.Size +Vector3.new(0,35,0)}
+local tween3 = tweenservice:Create(part , info3 , properties3)
+local tween4 = tweenservice:Create(part1 , info3 , properties4)
+local debounce = false
+local tickrate = 0
+local maxduration = 7
+local function activate(hit)
+	local character = hit.Parent
+	if character then
+		local humanoid = character:FindFirstChild("Humanoid")
+		if humanoid then
+			if debounce == true then return end
+			debounce = true
+			tween1:Play()
+			tween2:Play()
+			
+			tween2.Completed:Connect(function()
+				tween3:Play()
+				tween4:Play()
+				
+				
+			end)
+			tween4.Completed:Connect(function()
+				debounce = false
+				
+			end)
+		end
+	end
+end
+animationpart.Touched:Connect(activate)
+
